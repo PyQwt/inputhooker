@@ -55,11 +55,11 @@ ih_fgets(char *buf, int len, FILE *fp)
             DWORD timeout = 100; /* 100 milliseconds */
             DWORD result;
             if (PyOS_InputHook)
-		PyOS_InputHook();
+                PyOS_InputHook();
             result = WaitForSingleObject(hStdIn, timeout);
             if (result==WAIT_OBJECT_0) {
                 if (!wait_for_kbhit || _kbhit())
-		    has_input = 1;
+                    has_input = 1;
                 /* _kbhit returns nonzero if a keystroke is
                  * waiting in the console buffer. Since
                  * WaitForSingleObject returns WAIT_OBJECT_0
@@ -67,7 +67,7 @@ ih_fgets(char *buf, int len, FILE *fp)
                  * events, we need to check explicitly if
                  * a keystroke is available. */
                 else
-		    FlushConsoleInputBuffer(hStdIn);
+                    FlushConsoleInputBuffer(hStdIn);
             }
         }
 #else
@@ -81,7 +81,7 @@ ih_fgets(char *buf, int len, FILE *fp)
             /* 100000 microseconds */
             FD_SET(fn, &selectset);
             if (PyOS_InputHook)
-		PyOS_InputHook();
+                PyOS_InputHook();
             /* select resets selectset if no input was available */
             has_input = select(fn+1, &selectset, NULL, NULL, &timeout);
         }
@@ -209,9 +209,9 @@ initinputhooker(void)
     PyObject *m;
 
     m = Py_InitModule4("inputhooker", ih_methods, doc_module,
-		       (PyObject *)NULL, PYTHON_API_VERSION);
+                       (PyObject *)NULL, PYTHON_API_VERSION);
     if (m == NULL)
-	return;
+        return;
     
 #if !defined(HAVE_READLINE)
 #if defined(MS_WINDOWS) || defined(HAVE_SELECT)
